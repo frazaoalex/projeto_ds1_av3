@@ -3,26 +3,32 @@ package com.trabalho.av3.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import javassist.tools.rmi.ObjectNotFoundException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trabalho.av3.domain.Cliente;
+import com.trabalho.av3.services.ClienteService;
+
 
 
 @RestController
 @RequestMapping(value = "/clientes")
 public class ClienteResource {
 	
-	@GetMapping
-	public List<Cliente> listar(){
-		Cliente cli1 = new Cliente(null, "Alex","(85)8526-2221","alextest@gmail.com");
-		Cliente cli2 = new Cliente(null, "Diego B.","(85)9555-2221","diegotest@gmail.com");
-		
-		List<Cliente> clientes = new ArrayList<>();
-		clientes.add(cli1);
-		clientes.add(cli2);
-		
-		return clientes;
+	@Autowired
+	private ClienteService service;
+	
+	@GetMapping(value = "/{id}")
+	public  ResponseEntity<Cliente> find(@PathVariable Integer id) throws ObjectNotFoundException {
+		 
+		 Cliente obj = service.find(id);
+	     return ResponseEntity.ok().body(obj);
 	}
+	
 }
