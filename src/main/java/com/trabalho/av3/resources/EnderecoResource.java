@@ -1,7 +1,5 @@
 package com.trabalho.av3.resources;
 
-import javassist.tools.rmi.ObjectNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,23 +7,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trabalho.av3.domain.Cliente;
-import com.trabalho.av3.services.ClienteService;
+import com.trabalho.av3.domain.Endereco;
+import com.trabalho.av3.services.EnderecoService;
 
-
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+ 
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteResource {
-	
+@RequestMapping(value = "/endereco")
+public class EnderecoResource {
+
 	@Autowired
-	private ClienteService service;
+	private EnderecoService service;
 	
 	@GetMapping(value = "/{id}")
-	public  ResponseEntity<Cliente> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public  ResponseEntity<Endereco> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		 
-		 Cliente obj = service.find(id);
+		Endereco obj = service.find(id);
 	     return ResponseEntity.ok().body(obj);
 	}
-	
 }

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import net.minidev.json.annotate.JsonIgnore;
+
 @Entity
 public class Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -61,6 +63,7 @@ public class Cliente implements Serializable{
 		this.email = email;
 	}
 	
+	@JsonIgnore
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}

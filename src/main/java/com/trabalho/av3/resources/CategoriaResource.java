@@ -1,7 +1,5 @@
 package com.trabalho.av3.resources;
 
-import javassist.tools.rmi.ObjectNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,23 +7,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.trabalho.av3.domain.Cliente;
-import com.trabalho.av3.services.ClienteService;
+import com.trabalho.av3.domain.Categoria;
+import com.trabalho.av3.services.CategoriaService;
 
-
+import javassist.tools.rmi.ObjectNotFoundException;
+ 
+ 
 
 @RestController
-@RequestMapping(value = "/clientes")
-public class ClienteResource {
-	
+@RequestMapping(value = "/categoria")
+public class CategoriaResource {
+
 	@Autowired
-	private ClienteService service;
+	private CategoriaService  service;
 	
 	@GetMapping(value = "/{id}")
-	public  ResponseEntity<Cliente> find(@PathVariable Integer id) throws ObjectNotFoundException {
+	public  ResponseEntity<Categoria> find(@PathVariable Integer id) throws ObjectNotFoundException {
 		 
-		 Cliente obj = service.find(id);
+		 Categoria obj = service.find(id);
 	     return ResponseEntity.ok().body(obj);
 	}
-	
 }
